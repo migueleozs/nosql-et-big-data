@@ -1,0 +1,27 @@
+docker compose start
+docker exec -it iabdrj bash
+apt-get update
+apt-get install curl
+
+
+docker exec -it mongodb bash
+apt-get update
+apt-get install curl
+mongosh
+E.N.⚽ — 16:24
+curl -o /tmp/data.json https://data.atontour.info/books.json
+
+mongoimport --uri "mongodb://localhost:27017" --db packt --collection books --file /tmp/data.json --jsonArray
+
+show dbs
+
+
+
+
+python -m venv env
+
+env\Scripts\activate
+
+pip install pymango
+
+python test.py

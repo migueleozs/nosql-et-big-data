@@ -1,0 +1,641 @@
+PS C:\Users\54116\Documents\ESGI MIGUEL\nosql et big data\mongoDB> docker compose up -d
+[+] up 1/1
+ ✔ Container mongodb Started                                                                                                                                                                   0.5s
+
+What's next:
+    Filter, search, and stream logs from all your Compose services
+    in one place with Docker Desktop's Logs view. docker-desktop://dashboard/logs
+PS C:\Users\54116\Documents\ESGI MIGUEL\nosql et big data\mongoDB> docker exec -it mongodb mongosh
+Current Mongosh Log ID: 6a02fddc30f78612ff44ba88
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.2
+Using MongoDB:          8.2.7
+Using Mongosh:          2.8.2
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
+
+------
+   The server generated these startup warnings when booting
+   2026-05-12T10:15:43.257+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2026-05-12T10:15:43.521+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2026-05-12T10:15:43.521+00:00: For customers running the current memory allocator, we suggest changing the contents of the following sysfsFile
+   2026-05-12T10:15:43.521+00:00: For customers running the current memory allocator, we suggest changing the contents of the following sysfsFile
+   2026-05-12T10:15:43.521+00:00: We suggest setting the contents of sysfsFile to 0.
+   2026-05-12T10:15:43.522+00:00: We suggest setting swappiness to 0 or 1, as swapping can cause performance problems.
+------
+
+test> 
+
+test> school
+ReferenceError: school is not defined
+test> show
+MongoshInvalidInputError: [COMMON-10001] 'undefined' is not a valid argument for "show".
+test> show collections
+
+test> show collections
+
+test> create collection students
+Uncaught:
+SyntaxError: Missing semicolon. (1:6)
+
+> 1 | create collection students
+    |       ^
+  2 |
+
+test> create : collection students
+Uncaught:
+SyntaxError: Missing semicolon. (1:19)
+
+> 1 | create : collection students
+    |                    ^
+  2 |
+
+test> new collection students
+Uncaught:
+SyntaxError: Missing semicolon. (1:14)
+
+> 1 | new collection students
+    |               ^
+  2 |
+
+test> new collection : students
+Uncaught:
+SyntaxError: Missing semicolon. (1:14)
+
+> 1 | new collection : students
+    |               ^
+  2 |
+
+test> use school
+switched to db school
+school> createColletion students
+Uncaught:
+SyntaxError: Missing semicolon. (1:15)
+
+> 1 | createColletion students
+    |                ^
+  2 |
+
+school> createColletion: students
+ReferenceError: students is not defined
+school> createColletion (students)
+ReferenceError: createColletion is not defined
+school> db.createColletion (students)
+ReferenceError: students is not defined
+school> db.createColletion students
+Uncaught:
+SyntaxError: Missing semicolon. (1:18)
+
+> 1 | db.createColletion students
+    |                   ^
+  2 |
+
+school> db.createColletion: students
+Uncaught:
+SyntaxError: Missing semicolon. (1:18)
+
+> 1 | db.createColletion: students
+    |                   ^
+  2 |
+
+school> db.createColletion: students;
+Uncaught:
+SyntaxError: Missing semicolon. (1:18)
+
+> 1 | db.createColletion: students;
+    |                   ^
+  2 |
+
+school> db.createColletion("students")
+TypeError: db.createColletion is not a function
+school> show collections
+
+school> db.createCollection("students")
+{ ok: 1 }
+school> show collections
+students
+school> db.students.insertOne({name: "Miguel", age: 27})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6a03006930f78612ff44ba89')
+}
+school> db.students.find()
+[
+  { _id: ObjectId('6a03006930f78612ff44ba89'), name: 'Miguel', age: 27 }
+]
+school> db.students.insertMany({name: "Daniela", age: 27},{name:"Sebas", age 18},{name:"Erick", age: 31});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:69)
+
+> 1 | db.students.insertMany({name: "Daniela", age: 27},{name:"Sebas", age 18},{name:"Erick", age: 31});
+    |                                                                      ^
+  2 |
+
+school> db.students.insertMany({name: "Daniela"},{name:"Sebas", age 18},{name:"Erick", age: "Vieux"});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:60)
+
+> 1 | db.students.insertMany({name: "Daniela"},{name:"Sebas", age 18},{name:"Erick", age: "Vieux"});
+    |                                                             ^
+  2 |
+
+school> db.students.insertMany({name: "Daniela"},{name:"Sebas", age: 18},{name:"Erick", age: "Vieux"});
+MongoInvalidArgumentError: Argument "docs" must be an array of documents
+school> db.students.insertMany({name: "Daniela"},{name:"Sebas", age: 18},{name:"Erick", age: 31});
+MongoInvalidArgumentError: Argument "docs" must be an array of documents
+school> db.students.find()
+[
+  { _id: ObjectId('6a03006930f78612ff44ba89'), name: 'Miguel', age: 27 }
+]
+school> db.students.stats().count;
+1
+school> let stats = db.students.stats();
+
+school> db.students.updateOne( { _id: ObjectId(6a03006930f78612ff44ba89;
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug mongodb
+    Learn more at https://docs.docker.com/go/debug-cli/
+PS C:\Users\54116\Documents\ESGI MIGUEL\nosql et big data\mongoDB>  db.students.updateOne( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age : 28} };
+En línea: 1 Carácter: 72    
++ ... dateOne( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age :  ...
++                                                             ~~~~~
+La referencia de variable no es válida. El carácter ':' no va seguido de un carácter de nombre de variable válido. Considere la posibilidad de usar ${} para delimitar el nombre.
+En línea: 1 Carácter: 78
++ ... teOne( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age : 28 ...
++                                                                 ~
+Token '{' inesperado en la expresión o la instrucción.
+En línea: 1 Carácter: 90
++ ... e( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age : 28} };
++                                                                         ~
+Falta el paréntesis de cierre ')' en la expresión.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : InvalidVariableReferenceWithDrive
+ 
+PS C:\Users\54116\Documents\ESGI MIGUEL\nosql et big data\mongoDB>  db.students.updateOne( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age : 28} }, );
+En línea: 1 Carácter: 72
++ ... dateOne( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age :  ...
++                                                             ~~~~~
+La referencia de variable no es válida. El carácter ':' no va seguido de un carácter de nombre de variable válido. Considere la posibilidad de usar ${} para delimitar el nombre.
+En línea: 1 Carácter: 78
++ ... teOne( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age : 28 ...
++                                                                 ~
+Token '{' inesperado en la expresión o la instrucción.
+En línea: 1 Carácter: 91
++ ... { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age : 28} }, );
++                                                                       ~
+Falta una expresión después de ','.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : InvalidVariableReferenceWithDrive
+ 
+PS C:\Users\54116\Documents\ESGI MIGUEL\nosql et big data\mongoDB>  db.students.updateOne( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age: 28} }, ); 
+En línea: 1 Carácter: 72
++ ... dateOne( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age: 2 ...
++                                                             ~~~~~
+La referencia de variable no es válida. El carácter ':' no va seguido de un carácter de nombre de variable válido. Considere la posibilidad de usar ${} para delimitar el nombre.
+En línea: 1 Carácter: 78
++ ... teOne( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age: 28} ...
++                                                                 ~
+Token '{' inesperado en la expresión o la instrucción.
+En línea: 1 Carácter: 90
++ ...  { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age: 28} }, );
++                                                                       ~
+Falta una expresión después de ','.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : InvalidVariableReferenceWithDrive
+ 
+PS C:\Users\54116\Documents\ESGI MIGUEL\nosql et big data\mongoDB>  db.students.updateOne( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age: 28} }, );
+En línea: 1 Carácter: 72
++ ... dateOne( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age: 2 ...
++                                                             ~~~~~
+La referencia de variable no es válida. El carácter ':' no va seguido de un carácter de nombre de variable válido. Considere la posibilidad de usar ${} para delimitar el nombre.
+En línea: 1 Carácter: 78
++ ... teOne( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age: 28} ...
++                                                                 ~
+Token '{' inesperado en la expresión o la instrucción.
+En línea: 1 Carácter: 90
++ ...  { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age: 28} }, );
++                                                                       ~
+Falta una expresión después de ','.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : InvalidVariableReferenceWithDrive
+ 
+PS C:\Users\54116\Documents\ESGI MIGUEL\nosql et big data\mongoDB>  db.students.updateOne( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age: 28} }, );
+En línea: 1 Carácter: 72
++ ... dateOne( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age: 2 ...
++                                                             ~~~~~
+La referencia de variable no es válida. El carácter ':' no va seguido de un carácter de nombre de variable válido. Considere la posibilidad de usar ${} para delimitar el nombre.
+En línea: 1 Carácter: 78
++ ... teOne( { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age: 28} ...
++                                                                 ~
+Token '{' inesperado en la expresión o la instrucción.
+En línea: 1 Carácter: 90
++ ...  { _id: ObjectId("6a03006930f78612ff44ba89")}, {$set: {age: 28} }, );
++                                                                       ~
+Falta una expresión después de ','.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : InvalidVariableReferenceWithDrive
+ 
+PS C:\Users\54116\Documents\ESGI MIGUEL\nosql et big data\mongoDB>  db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {age: 28} }, );
+En línea: 1 Carácter: 72
++ ... dateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {age: 2 ...
++                                                             ~~~~~
+La referencia de variable no es válida. El carácter ':' no va seguido de un carácter de nombre de variable válido. Considere la posibilidad de usar ${} para delimitar el nombre.
+En línea: 1 Carácter: 78
++ ... teOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {age: 28} ...
++                                                                 ~
+Token '{' inesperado en la expresión o la instrucción.
+En línea: 1 Carácter: 90
++ ...  { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {age: 28} }, );
++                                                                       ~
+Falta una expresión después de ','.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : InvalidVariableReferenceWithDrive
+ 
+PS C:\Users\54116\Documents\ESGI MIGUEL\nosql et big data\mongoDB> docker exec -it mongodb mongosh                                                             
+Current Mongosh Log ID: 6a0303d88862778cb644ba88
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.2
+Using MongoDB:          8.2.7
+Using Mongosh:          2.8.2
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2026-05-12T10:15:43.257+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2026-05-12T10:15:43.521+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2026-05-12T10:15:43.521+00:00: For customers running the current memory allocator, we suggest changing the contents of the following sysfsFile
+   2026-05-12T10:15:43.521+00:00: For customers running the current memory allocator, we suggest changing the contents of the following sysfsFile
+   2026-05-12T10:15:43.521+00:00: We suggest setting the contents of sysfsFile to 0.
+   2026-05-12T10:15:43.522+00:00: We suggest setting swappiness to 0 or 1, as swapping can cause performance problems.
+------
+
+test> let stats = db.students.stats();
+MongoServerError[NamespaceNotFound]: Executor error during aggregate command on namespace: test.students :: caused by :: Unable to retrieve storageStats in $collStats stage :: caused by :: Collection [test.students] not found.
+test> use school
+switched to db school
+school> 
+(To exit, press Ctrl+C again or Ctrl+D or type .exit)
+school> db.students.find()
+[
+  { _id: ObjectId('6a03006930f78612ff44ba89'), name: 'Miguel', age: 27 }
+]
+school> db.students.insertMany({name: "Daniela"},{name:"Sebas", age: 18},{name:"Erick", age: 31});
+MongoInvalidArgumentError: Argument "docs" must be an array of documents
+school> db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {age: 28} }, );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+school> db.students.find()
+[
+  { _id: ObjectId('6a03006930f78612ff44ba89'), name: 'Miguel', age: 28 }
+]
+school> db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: 113812938} }, );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+school> db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: [113812938,12353421]} }, );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+school> db.students.find()
+[
+  {
+    _id: ObjectId('6a03006930f78612ff44ba89'),
+    name: 'Miguel',
+    age: 28,
+    telephone: [ 113812938, 12353421 ]
+  }
+]
+school> db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: [{type: "perso", num: 113812938},{12353421}]} }, );
+Uncaught:
+SyntaxError: Unexpected token (1:130)
+
+> 1 | db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: [{type: "perso", num: 113812938},{12353421}]} }, );
+    |                                                                                                                                   ^
+  2 |
+
+school> db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: [{type: "perso", num: "113812938"},{type: "pro12353421}]} }, );
+Uncaught:
+SyntaxError: Unterminated string constant. (1:130)
+
+> 1 | db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: [{type: "perso", num: "113812938"},{type: "pro12353421}]} }, );
+    |                                                                                                                                   ^
+  2 |
+
+school> db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: [{type: "perso", num: "113812938"},{type: "pro", num: "12353421"}]} }, );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+school> db.students.find()
+[
+  {
+    _id: ObjectId('6a03006930f78612ff44ba89'),
+    name: 'Miguel',
+    age: 28,
+    telephone: [
+      { type: 'perso', num: '113812938' },
+      { type: 'pro', num: '12353421' }
+    ]
+  }
+]
+school> db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: {perso: "113812938", pro: "12353421"} }, );
+Uncaught:
+SyntaxError: Unexpected token (1:129)
+
+> 1 | db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: {perso: "113812938", pro: "12353421"} }, );
+    |                                                                                                                                  ^
+  2 |
+
+school> db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: {perso: "113812938", pro: "12353421"} };
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:127)
+
+> 1 | db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: {perso: "113812938", pro: "12353421"} };
+    |                                                                                                                                ^
+  2 |
+
+school> db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: {perso: "113812938", pro: "12353421"} }};
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:128)
+
+> 1 | db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: {perso: "113812938", pro: "12353421"} }};
+    |                                                                                                                                 ^
+  2 |
+
+school> db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: {perso: "113812938", pro: "12353421"}, },};
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:130)
+
+> 1 | db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: {perso: "113812938", pro: "12353421"}, },};
+    |                                                                                                                                   ^
+  2 |
+
+school> db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: {perso: "113812938", pro: "12353421"}, },},};
+Uncaught:
+SyntaxError: Unexpected token (1:131)
+
+> 1 | db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: {perso: "113812938", pro: "12353421"}, },},};
+    |                                                                                                                                    ^
+  2 |
+
+school> db.students.updateOne( { _id: ObjectId('6a03006930f78612ff44ba89')}, {$set: {telephone: {perso: "113812938", pro: "12353421"}, },},);
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+school> db.students.find()
+[
+  {
+    _id: ObjectId('6a03006930f78612ff44ba89'),
+    name: 'Miguel',
+    age: 28,
+    telephone: { perso: '113812938', pro: '12353421' }
+  }
+]
+school> db.students.insertMany({name: "Daniela"},{name:"Sebas", age: 18},{name:"Erick", age: 31});
+MongoInvalidArgumentError: Argument "docs" must be an array of documents
+school> db.students.updateMany( {}, { $set: {note: 10} } );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+school> db.students.find()
+[
+  {
+    _id: ObjectId('6a03006930f78612ff44ba89'),
+    name: 'Miguel',
+    age: 28,
+    telephone: { perso: '113812938', pro: '12353421' },
+    note: 10
+  }
+]
+school> db.students.insertMany([{name: "Daniela"},{name:"Sebas", age: 18},{name:"Erick", age: 31}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a03070f8862778cb644ba89'),
+    '1': ObjectId('6a03070f8862778cb644ba8a'),
+    '2': ObjectId('6a03070f8862778cb644ba8b')
+  }
+}
+school> db.students.find()
+[
+  {
+    _id: ObjectId('6a03006930f78612ff44ba89'),
+    name: 'Miguel',
+    age: 28,
+    telephone: { perso: '113812938', pro: '12353421' },
+    note: 10
+  },
+  { _id: ObjectId('6a03070f8862778cb644ba89'), name: 'Daniela' },
+  { _id: ObjectId('6a03070f8862778cb644ba8a'), name: 'Sebas', age: 18 },
+  { _id: ObjectId('6a03070f8862778cb644ba8b'), name: 'Erick', age: 31 }
+]
+school> db.students.updateMany( {}, { $set: {note: 10} } );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 3,
+  upsertedCount: 0
+}
+school> db.students.find()
+[
+  {
+    _id: ObjectId('6a03006930f78612ff44ba89'),
+    name: 'Miguel',
+    age: 28,
+    telephone: { perso: '113812938', pro: '12353421' },
+    note: 10
+  },
+  {
+    _id: ObjectId('6a03070f8862778cb644ba89'),
+    name: 'Daniela',
+    note: 10
+  },
+  {
+    _id: ObjectId('6a03070f8862778cb644ba8a'),
+    name: 'Sebas',
+    age: 18,
+    note: 10
+  },
+  {
+    _id: ObjectId('6a03070f8862778cb644ba8b'),
+    name: 'Erick',
+    age: 31,
+    note: 10
+  }
+]
+school> db.students.updateMany( {}, { $unset: {note: ""} } );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+school> db.students.find()
+[
+  {
+    _id: ObjectId('6a03006930f78612ff44ba89'),
+    name: 'Miguel',
+    age: 28,
+    telephone: { perso: '113812938', pro: '12353421' }
+  },
+  { _id: ObjectId('6a03070f8862778cb644ba89'), name: 'Daniela' },
+  { _id: ObjectId('6a03070f8862778cb644ba8a'), name: 'Sebas', age: 18 },
+  { _id: ObjectId('6a03070f8862778cb644ba8b'), name: 'Erick', age: 31 }
+]
+school> db.students.updateMany( {}, { $set: {note: Math.random(0,20)} } );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+school> db.students.find()
+[
+  {
+    _id: ObjectId('6a03006930f78612ff44ba89'),
+    name: 'Miguel',
+    age: 28,
+    telephone: { perso: '113812938', pro: '12353421' },
+    note: 0.5502113382398056
+  },
+  {
+    _id: ObjectId('6a03070f8862778cb644ba89'),
+    name: 'Daniela',
+    note: 0.5502113382398056
+  },
+  {
+    _id: ObjectId('6a03070f8862778cb644ba8a'),
+    name: 'Sebas',
+    age: 18,
+    note: 0.5502113382398056
+  },
+  {
+    _id: ObjectId('6a03070f8862778cb644ba8b'),
+    name: 'Erick',
+    age: 31,
+    note: 0.5502113382398056
+  }
+]
+school> db.students.updateMany( {}, { $set: {note: Math.random() * 20 } } );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+school> db.students.find()
+[
+  {
+    _id: ObjectId('6a03006930f78612ff44ba89'),
+    name: 'Miguel',
+    age: 28,
+    telephone: { perso: '113812938', pro: '12353421' },
+    note: 12.459618913856843
+  },
+  {
+    _id: ObjectId('6a03070f8862778cb644ba89'),
+    name: 'Daniela',
+    note: 12.459618913856843
+  },
+  {
+    _id: ObjectId('6a03070f8862778cb644ba8a'),
+    name: 'Sebas',
+    age: 18,
+    note: 12.459618913856843
+  },
+  {
+    _id: ObjectId('6a03070f8862778cb644ba8b'),
+    name: 'Erick',
+    age: 31,
+    note: 12.459618913856843
+  }
+]
+school> db.students.find().forEach(function (student) {db.students.updateOne( {}, { $set: {note: Math.random() * 20 } } );});
+
+school> db.students.find()
+[
+  {
+    _id: ObjectId('6a03006930f78612ff44ba89'),
+    name: 'Miguel',
+    age: 28,
+    telephone: { perso: '113812938', pro: '12353421' },
+    note: 16.072514471025457
+  },
+  {
+    _id: ObjectId('6a03070f8862778cb644ba89'),
+    name: 'Daniela',
+    note: 12.459618913856843
+  },
+  {
+    _id: ObjectId('6a03070f8862778cb644ba8a'),
+    name: 'Sebas',
+    age: 18,
+    note: 12.459618913856843
+  },
+  {
+    _id: ObjectId('6a03070f8862778cb644ba8b'),
+    name: 'Erick',
+    age: 31,
+    note: 12.459618913856843
+  }
+]
+school> db.students.find().forEach(function (student) {db.students.updateOne( {_id: student._id}, { $set: {note: Math.random() * 20 } } );});
+
+school> db.students.find()
+[
+  {
+    _id: ObjectId('6a03006930f78612ff44ba89'),
+    name: 'Miguel',
+    age: 28,
+    telephone: { perso: '113812938', pro: '12353421' },
+    note: 18.75978312711596
+  },
+  {
+    _id: ObjectId('6a03070f8862778cb644ba89'),
+    name: 'Daniela',
+    note: 12.397834390113083
+  },
+  {
+    _id: ObjectId('6a03070f8862778cb644ba8a'),
+    name: 'Sebas',
+    age: 18,
+    note: 17.50008239007991
+  },
+  {
+    _id: ObjectId('6a03070f8862778cb644ba8b'),
+    name: 'Erick',
+    age: 31,
+    note: 12.955326693090761
+  }
+]
